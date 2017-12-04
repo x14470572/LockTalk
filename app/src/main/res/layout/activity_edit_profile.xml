@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.markenteder.locktalk.EditProfile">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/connectionsBtn"
+            style="@android:style/Widget.Button"
+            android:layout_width="94dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="84dp"
+            android:layout_marginStart="232dp"
+            android:background="@drawable/rounded_corner_button"
+            android:elevation="0dp"
+            android:text="Connections"
+            android:textColor="#a60000"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/archivedBtn"
+            style="@android:style/Widget.Button"
+            android:layout_width="94dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="42dp"
+            android:layout_marginStart="264dp"
+            android:background="@drawable/rounded_corner_button"
+            android:elevation="0dp"
+            android:text="Archived"
+            android:textColor="#a60000"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/connectBtn"
+            style="@android:style/Widget.Button"
+            android:layout_width="94dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="82dp"
+            android:layout_marginStart="28dp"
+            android:background="@drawable/rounded_corner_button"
+            android:elevation="0dp"
+            android:text="Connect"
+            android:textColor="#a60000"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/hubBtn"
+            style="@android:style/Widget.Button"
+            android:layout_width="94dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="100dp"
+            android:layout_marginStart="132dp"
+            android:background="@drawable/rounded_corner_button"
+            android:elevation="0dp"
+            android:text="Hub"
+            android:textColor="#a60000"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/profileBtn"
+            style="@android:style/Widget.Button"
+            android:layout_width="94dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/rounded_corner_button"
+            android:elevation="0dp"
+            android:text="Profile"
+            android:textColor="#a60000"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/menuBtn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="84dp"
+            android:layout_marginStart="156dp"
+            android:background="@drawable/circle_button"
+            android:shadowColor="@android:color/background_light"
+            android:shadowDx="1"
+            app:layout_constraintBottom_toBottomOf="@+id/backgroundIV"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/saveBtn"
+            style="@android:style/Widget.Button"
+            android:layout_width="89dp"
+            android:layout_height="26dp"
+            android:layout_marginEnd="136dp"
+            android:layout_marginTop="368dp"
+            android:background="@drawable/rounded_corner_button"
+            android:elevation="0dp"
+            android:text="Save"
+            android:textColor="#a60000"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/profilePicImgBtn"
+            android:layout_width="87dp"
+            android:layout_height="86dp"
+            android:layout_marginStart="132dp"
+            android:layout_marginTop="72dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/profile_pic_resized" />
+
+        <ImageView
+            android:id="@+id/backgroundIV"
+            android:layout_width="410dp"
+            android:layout_height="650dp"
+            android:layout_marginEnd="1dp"
+            android:alpha="0.3"
+            android:src="@drawable/padlock"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/plusIV"
+            android:layout_width="29dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="124dp"
+            android:layout_marginTop="148dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/plus_sign_resized" />
+
+        <Switch
+            android:id="@+id/mobileToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="200dp"
+            android:checked="true"
+            android:text="Private"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Switch
+            android:id="@+id/emailToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="304dp"
+            android:checked="false"
+            android:text="Private"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Switch
+            android:id="@+id/nameToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="252dp"
+            android:alpha="1"
+            android:text="Private"
+            android:textColor="@android:color/background_dark"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/nameTF"
+            android:layout_width="178dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="240dp"
+            android:backgroundTint="@android:color/background_dark"
+            android:ems="10"
+            android:inputType="number"
+            android:text="Full Name"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_dark"
+            android:textColorHint="@android:color/background_dark"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/emailTF"
+            android:layout_width="178dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="296dp"
+            android:backgroundTint="@android:color/background_dark"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:text="Email"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_dark"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/mobileTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="200dp"
+            android:text="Mobile Number"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#99e60000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/headerTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="16dp"
+            android:text="Username"
+            android:textColor="@android:color/background_light"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>
