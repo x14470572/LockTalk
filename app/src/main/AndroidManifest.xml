@@ -22,6 +22,7 @@
         <activity android:name=".SearchUsers" />
         <activity android:name=".PairRequest" />
         <activity android:name=".Connections" />
+        <activity android:name=".Messaging"></activity>
     </application>
 
 </manifest>
