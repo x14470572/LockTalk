@@ -11,119 +11,64 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <TextView
+            android:id="@+id/fNameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="240dp"
+            android:text="@string/default_fName"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/emailTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="280dp"
+            android:text="@string/default_email"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/connectionsBtn"
+            android:id="@+id/saveImgBtn"
             style="@android:style/Widget.Button"
-            android:layout_width="94dp"
-            android:layout_height="35dp"
-            android:layout_marginBottom="84dp"
-            android:layout_marginStart="232dp"
+            android:layout_width="25dp"
+            android:layout_height="26dp"
+            android:layout_marginEnd="124dp"
+            android:layout_marginTop="156dp"
             android:background="@drawable/rounded_corner_button"
             android:elevation="0dp"
-            android:text="Connections"
+            android:text="+"
             android:textColor="#a60000"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/archivedBtn"
-            style="@android:style/Widget.Button"
-            android:layout_width="94dp"
-            android:layout_height="35dp"
-            android:layout_marginBottom="42dp"
-            android:layout_marginStart="264dp"
-            android:background="@drawable/rounded_corner_button"
-            android:elevation="0dp"
-            android:text="Archived"
-            android:textColor="#a60000"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/connectBtn"
-            style="@android:style/Widget.Button"
-            android:layout_width="94dp"
-            android:layout_height="35dp"
-            android:layout_marginBottom="82dp"
-            android:layout_marginStart="28dp"
-            android:background="@drawable/rounded_corner_button"
-            android:elevation="0dp"
-            android:text="Connect"
-            android:textColor="#a60000"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/hubBtn"
-            style="@android:style/Widget.Button"
-            android:layout_width="94dp"
-            android:layout_height="35dp"
-            android:layout_marginBottom="100dp"
-            android:layout_marginStart="132dp"
-            android:background="@drawable/rounded_corner_button"
-            android:elevation="0dp"
-            android:text="Hub"
-            android:textColor="#a60000"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/profileBtn"
-            style="@android:style/Widget.Button"
-            android:layout_width="94dp"
-            android:layout_height="35dp"
-            android:layout_marginBottom="40dp"
-            android:background="@drawable/rounded_corner_button"
-            android:elevation="0dp"
-            android:text="Profile"
-            android:textColor="#a60000"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/menuBtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginBottom="84dp"
-            android:layout_marginStart="156dp"
-            android:background="@drawable/circle_button"
-            android:shadowColor="@android:color/background_light"
-            android:shadowDx="1"
-            app:layout_constraintBottom_toBottomOf="@+id/backgroundIV"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/saveBtn"
             style="@android:style/Widget.Button"
             android:layout_width="89dp"
             android:layout_height="26dp"
-            android:layout_marginEnd="136dp"
-            android:layout_marginTop="368dp"
+            android:layout_marginBottom="40dp"
+            android:layout_marginEnd="160dp"
             android:background="@drawable/rounded_corner_button"
             android:elevation="0dp"
             android:text="Save"
             android:textColor="#a60000"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/profilePicImgBtn"
-            android:layout_width="87dp"
-            android:layout_height="86dp"
-            android:layout_marginStart="132dp"
-            android:layout_marginTop="72dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/profile_pic_resized" />
+            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout4"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageView
             android:id="@+id/backgroundIV"
@@ -136,16 +81,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/plusIV"
-            android:layout_width="29dp"
-            android:layout_height="28dp"
-            android:layout_marginEnd="124dp"
-            android:layout_marginTop="148dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/plus_sign_resized" />
 
         <Switch
             android:id="@+id/mobileToggle"
@@ -163,20 +98,20 @@
             android:id="@+id/emailToggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="262dp"
             android:layout_marginEnd="40dp"
-            android:layout_marginTop="304dp"
             android:checked="false"
             android:text="Private"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Switch
             android:id="@+id/nameToggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="40dp"
-            android:layout_marginTop="252dp"
+            android:layout_marginTop="240dp"
             android:alpha="1"
             android:text="Private"
             android:textColor="@android:color/background_dark"
@@ -188,42 +123,43 @@
             android:id="@+id/nameTF"
             android:layout_width="178dp"
             android:layout_height="42dp"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="240dp"
+            android:layout_marginBottom="164dp"
+            android:layout_marginStart="92dp"
             android:backgroundTint="@android:color/background_dark"
             android:ems="10"
-            android:inputType="number"
-            android:text="Full Name"
+            android:hint="Full Name"
+            android:inputType="text"
             android:textAlignment="center"
             android:textColor="@android:color/background_dark"
             android:textColorHint="@android:color/background_dark"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
             android:id="@+id/emailTF"
             android:layout_width="178dp"
             android:layout_height="44dp"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="296dp"
+            android:layout_marginBottom="108dp"
+            android:layout_marginStart="92dp"
             android:backgroundTint="@android:color/background_dark"
             android:ems="10"
+            android:hint="Email"
             android:inputType="textEmailAddress"
-            android:text="Email"
             android:textAlignment="center"
             android:textColor="@android:color/background_dark"
+            android:textColorHint="@android:color/background_dark"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/mobileTxt"
+            android:id="@+id/mobileTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="68dp"
             android:layout_marginTop="200dp"
-            android:text="Mobile Number"
+            android:text="@string/default_number"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -241,11 +177,20 @@
 
         </android.support.constraint.ConstraintLayout>
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark" />
+
         <TextView
-            android:id="@+id/headerTxt"
+            android:id="@+id/uNameTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="120dp"
+            android:layout_marginStart="132dp"
             android:layout_marginTop="16dp"
             android:text="Username"
             android:textColor="@android:color/background_light"
@@ -253,6 +198,16 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/displayImage"
+            android:layout_width="103dp"
+            android:layout_height="101dp"
+            android:layout_marginStart="156dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/profile_pic_resized"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

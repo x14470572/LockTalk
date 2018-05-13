@@ -14,92 +14,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/connectionsBtn"
-            style="@android:style/Widget.Button"
-            android:layout_width="94dp"
-            android:layout_height="35dp"
-            android:layout_marginBottom="84dp"
-            android:layout_marginStart="232dp"
-            android:background="@drawable/rounded_corner_button"
-            android:elevation="0dp"
-            android:text="Connections"
-            android:textColor="#a60000"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/archivedBtn"
-            style="@android:style/Widget.Button"
-            android:layout_width="94dp"
-            android:layout_height="35dp"
-            android:layout_marginBottom="42dp"
-            android:layout_marginStart="264dp"
-            android:background="@drawable/rounded_corner_button"
-            android:elevation="0dp"
-            android:text="Archived"
-            android:textColor="#a60000"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/connectBtn"
-            style="@android:style/Widget.Button"
-            android:layout_width="94dp"
-            android:layout_height="35dp"
-            android:layout_marginBottom="82dp"
-            android:layout_marginStart="28dp"
-            android:background="@drawable/rounded_corner_button"
-            android:elevation="0dp"
-            android:text="Connect"
-            android:textColor="#a60000"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/hubBtn"
-            style="@android:style/Widget.Button"
-            android:layout_width="94dp"
-            android:layout_height="35dp"
-            android:layout_marginBottom="100dp"
-            android:layout_marginStart="132dp"
-            android:background="@drawable/rounded_corner_button"
-            android:elevation="0dp"
-            android:text="Hub"
-            android:textColor="#a60000"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/profileBtn"
-            style="@android:style/Widget.Button"
-            android:layout_width="94dp"
-            android:layout_height="35dp"
-            android:layout_marginBottom="40dp"
-            android:background="@drawable/rounded_corner_button"
-            android:elevation="0dp"
-            android:text="Profile"
-            android:textColor="#a60000"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/menuBtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginBottom="84dp"
-            android:layout_marginStart="156dp"
-            android:background="@drawable/circle_button"
-            android:shadowColor="@android:color/background_light"
-            android:shadowDx="1"
-            app:layout_constraintBottom_toBottomOf="@+id/backgroundIV"
-            app:layout_constraintStart_toStartOf="parent" />
-
         <ImageView
             android:id="@+id/backgroundIV"
             android:layout_width="410dp"
@@ -123,66 +37,34 @@
 
         </android.support.constraint.ConstraintLayout>
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark" />
+
         <TextView
             android:id="@+id/HubTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
+            android:layout_marginStart="112dp"
             android:layout_marginTop="16dp"
-            android:text="Connection Requests"
+            android:text="Connections"
             android:textColor="@android:color/background_light"
-            android:textSize="25sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="350dp"
-            android:layout_height="45dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginTop="76dp"
-            android:alpha="0.5"
-            android:background="@android:color/background_dark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="9px"
-                android:layout_marginBottom="4dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginStart="3dp"
-                android:layout_marginTop="3dp"
-                android:background="@android:color/background_light"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageButton
-                    android:id="@+id/profileImgBtn"
-                    android:layout_width="120px"
-                    android:layout_height="115px"
-                    android:src="@drawable/profile_resized"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/userTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="44dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Username wants to connect with you!"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/background_dark"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </android.support.constraint.ConstraintLayout>
-        </android.support.constraint.ConstraintLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/pairsRV"
+            android:layout_width="368dp"
+            android:layout_height="531dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="119dp" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>
