@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "909607553647",
+    "firebase_url": "https://locktalk-cb559.firebaseio.com",
+    "project_id": "locktalk-cb559",
+    "storage_bucket": "locktalk-cb559.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:909607553647:android:220ce4c25df3966f",
+        "android_client_info": {
+          "package_name": "com.example.markenteder.locktalk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "909607553647-onnnh2m7hjsqj3vprsfgl1dvaib20t25.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.markenteder.locktalk",
+            "certificate_hash": "c25a379cab32d46388c01320e168a24ed740fb51"
+          }
+        },
+        {
+          "client_id": "909607553647-pb9dd96n3bgnec16rjb3m09haq13c2d5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9_tpsmqwgIg2CEYLQ9K4FiY0Jf1u7Gew"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "909607553647-pb9dd96n3bgnec16rjb3m09haq13c2d5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
