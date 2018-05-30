@@ -2,16 +2,17 @@ package com.example.markenteder.locktalk;
 
 public class Users {
 
-    public String fullname, image, username;
+    public String fullname, image, username, small_image;
 
     public Users(){
 
     }
 
-    public Users(String fullname, String image, String username) {
+    public Users(String fullname, String image, String username, String small_image) {
         this.fullname = fullname;
         this.image = image;
         this.username = username;
+        this.small_image = small_image;
     }
 
     public String getFullname() {
@@ -38,7 +39,11 @@ public class Users {
         this.username = username;
     }
 
+    public String getSmallImage() {
+        return small_image;
+    }
 
-
-
+    public void setSmallImage(String small_image) {
+        this.small_image = small_image;
+    }
 }

@@ -14,40 +14,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/nameTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="136dp"
-            android:layout_marginTop="216dp"
-            android:text="Full Name"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/mobileTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="136dp"
-            android:layout_marginTop="248dp"
-            android:text="Mobile Number"
-            android:textSize="18sp"
+        <Button
+            android:id="@+id/connectReqBtn"
+            style="@android:style/Widget.Button"
+            android:layout_width="168dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="462dp"
+            android:background="@drawable/rounded_corner_button"
+            android:elevation="0dp"
+            android:text="Connect"
+            android:textColor="#a60000"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/connectReqBtn"
+            android:id="@+id/declineReqBtn"
             style="@android:style/Widget.Button"
-            android:layout_width="89dp"
+            android:layout_width="167dp"
             android:layout_height="26dp"
-            android:layout_marginStart="136dp"
-            android:layout_marginTop="344dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="506dp"
             android:background="@drawable/rounded_corner_button"
             android:elevation="0dp"
-            android:text="Connect"
+            android:text="Decline Request"
             android:textColor="#a60000"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,26 +56,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/emailTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="200dp"
-            android:layout_marginTop="292dp"
-            android:text="Email"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <android.support.constraint.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#99e60000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
         </android.support.constraint.ConstraintLayout>
 
@@ -97,16 +78,6 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:theme="@style/ThemeOverlay.AppCompat.Dark" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profilePic"
-            android:layout_width="111dp"
-            android:layout_height="114dp"
-            android:layout_marginStart="124dp"
-            android:layout_marginTop="76dp"
-            android:src="@drawable/profile_resized"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/userTxt"
             android:layout_width="wrap_content"
@@ -116,6 +87,55 @@
             android:text="Username"
             android:textColor="@android:color/background_light"
             android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profilePic"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginEnd="106dp"
+            android:layout_marginTop="64dp"
+            android:src="@drawable/profile_resized"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/nameTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="130dp"
+            android:layout_marginTop="260dp"
+            android:text="Full Name"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/mobileTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="120dp"
+            android:layout_marginTop="296dp"
+            android:text="Mobile Number"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/emailTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="110dp"
+            android:layout_marginTop="336dp"
+            android:text="Email"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

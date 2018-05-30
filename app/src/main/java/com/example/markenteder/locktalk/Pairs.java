@@ -2,30 +2,16 @@ package com.example.markenteder.locktalk;
 
 public class Pairs {
 
-    public String username, fullname;
+    public String date;
 
     public Pairs(){
 
     }
 
-    public String getUsername() {
-        return username;
-    }
+    public Pairs(String date) {this.date = date; }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    public String getDate() {return date; }
 
-    public String getFullname() {
-        return fullname;
-    }
+    public void setDate(String date) {this.date = date; }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
-
-    public Pairs(String username, String fullname) {
-        this.username = username;
-        this.fullname = fullname;
-    }
 }

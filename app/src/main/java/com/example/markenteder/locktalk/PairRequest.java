@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,11 +23,21 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.math.BigInteger;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -34,14 +45,20 @@ public class PairRequest extends AppCompatActivity {
 
     private CircleImageView uProfilePic;
     private TextView uName, fName, uEmail, pNumber;
-    private Button pairRequestBtn;
+    private Button pairRequestBtn, decRequestBtn;
 
     private DatabaseReference uDatabase;
     private DatabaseReference uPairReqDatabase;
     private DatabaseReference uPairsDatabase;
+    private DatabaseReference uNotificationsDB;
+    private DatabaseReference rootReference;
+    private DatabaseReference keysDatabase;
+    private DatabaseReference userRef;
+
     private FirebaseUser currentUser;
 
     private String uPairReqState;
+    private BigInteger g,p,x,y,A,B,s1,s2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +67,20 @@ public class PairRequest extends AppCompatActivity {
         Toolbar toolBar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolBar);
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
+
         final String userId = getIntent().getStringExtra("userId");
 
         uDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
         uPairReqDatabase = FirebaseDatabase.getInstance().getReference().child("PairRequest");
         uPairsDatabase = FirebaseDatabase.getInstance().getReference().child("Pairs");
+        uNotificationsDB = FirebaseDatabase.getInstance().getReference().child("Notifications");
+        keysDatabase = FirebaseDatabase.getInstance().getReference().child("PublicKeys");
+        rootReference = FirebaseDatabase.getInstance().getReference();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUser.getUid());
+
 
         uProfilePic = (CircleImageView) findViewById(R.id.profilePic);
         uName = (TextView) findViewById(R.id.userTxt);
@@ -63,10 +88,12 @@ public class PairRequest extends AppCompatActivity {
         uEmail = (TextView) findViewById(R.id.emailTxt);
         pNumber = (TextView) findViewById(R.id.mobileTxt);
         pairRequestBtn = (Button) findViewById(R.id.connectReqBtn);
+        decRequestBtn = (Button) findViewById(R.id.declineReqBtn);
 
         uPairReqState = "notPaired";
 
-
+        decRequestBtn.setVisibility(View.INVISIBLE);
+        decRequestBtn.setEnabled(false);
 
         uDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -84,9 +111,15 @@ public class PairRequest extends AppCompatActivity {
 
                 Picasso.get().load(image).into(uProfilePic);
 
+                if(currentUser.getUid().equals(userId)){
+                    pairRequestBtn.setEnabled(false);
+                    pairRequestBtn.setVisibility(View.INVISIBLE);
+                }
+
+
                 // Connections List
 
-                uPairReqDatabase.child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                uPairReqDatabase.child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.hasChild(userId)){
@@ -95,17 +128,26 @@ public class PairRequest extends AppCompatActivity {
                             if(reqState.equals("received")){
                                 uPairReqState = "requestReceived";
                                 pairRequestBtn.setText("Accept Friend Request");
+
+                                decRequestBtn.setVisibility(View.VISIBLE);
+                                decRequestBtn.setEnabled(true);
                             } else if(reqState.equals("sent")){
                                 uPairReqState = "requestSent";
                                 pairRequestBtn.setText("Rescind Request");
+
+                                decRequestBtn.setVisibility(View.INVISIBLE);
+                                decRequestBtn.setEnabled(false);
                             }
                         } else {
-                            uPairReqDatabase.child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            uPairsDatabase.child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     if(dataSnapshot.hasChild(userId)){
                                         uPairReqState = "paired";
                                         pairRequestBtn.setText("Remove Pairing");
+
+                                        decRequestBtn.setVisibility(View.INVISIBLE);
+                                        decRequestBtn.setEnabled(false);
                                     }
                                 }
 
@@ -137,9 +179,11 @@ public class PairRequest extends AppCompatActivity {
 
                 pairRequestBtn.setEnabled(false);
 
+                //Complete Strangers
+
                 if(uPairReqState.equals("notPaired")){
 
-                    //Complete Strangers
+
 
                     uPairReqDatabase.child(currentUser.getUid()).child(userId).child("pairReqState")
                             .setValue("sent").addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -151,23 +195,36 @@ public class PairRequest extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(Void aVoid) {
 
+                                        HashMap<String, String> nData = new HashMap<>();
+                                        nData.put("from", currentUser.getUid());
+                                        nData.put("type", "request");
 
-                                        uPairReqState = "requestSent";
-                                        pairRequestBtn.setText("Rescind Request");
 
-                                        Toast.makeText(PairRequest.this, "Request Sent Successfully",Toast.LENGTH_LONG).show();
+                                        uNotificationsDB.child(userId).push().setValue(nData).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                pairRequestBtn.setEnabled(true);
+                                                uPairReqState = "requestSent";
+                                                pairRequestBtn.setText("Rescind Request");
+
+                                                decRequestBtn.setVisibility(View.INVISIBLE);
+                                                decRequestBtn.setEnabled(false);
+
+                                                Toast.makeText(PairRequest.this, "Request Sent Successfully",Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+
                                     }
                                 });
 
                             }else {
                                 Toast.makeText(PairRequest.this, "Failed Sending Request",Toast.LENGTH_LONG).show();
                             }
-                            pairRequestBtn.setEnabled(true);
                         }
                     });
                 }
 
-                // Cancel Request
+                // Cancelling Pair Request
                 if(uPairReqState.equals("requestSent")){
                     uPairReqDatabase.child(currentUser.getUid()).child(userId).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -178,6 +235,9 @@ public class PairRequest extends AppCompatActivity {
                                     pairRequestBtn.setEnabled(true);
                                     uPairReqState = "notPaired";
                                     pairRequestBtn.setText("Connect");
+
+                                    decRequestBtn.setVisibility(View.INVISIBLE);
+                                    decRequestBtn.setEnabled(false);
                                 }
                             });
                         }
@@ -214,40 +274,93 @@ public class PairRequest extends AppCompatActivity {
                     });
                 }
 
-                // Received Request
+                // Received Pair Request
                 if(uPairReqState.equals("requestReceived")){
 
                     final String curDate = DateFormat.getDateTimeInstance().format(new Date());
 
-                    uPairsDatabase.child(currentUser.getUid()).child(userId).setValue(curDate)
+                    SecretKey sK = new SecretKey();
+                    final byte[] DHSecBytes = sK.GenDHSecret();
+                    final String DHSec = toHexString(DHSecBytes);
+
+
+
+                    uPairsDatabase.child(currentUser.getUid()).child(userId).child("date").setValue(curDate)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            uPairsDatabase.child(userId).child(currentUser.getUid()).setValue(curDate)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            uPairReqDatabase.child(currentUser.getUid()).child(userId).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            uPairsDatabase.child(currentUser.getUid()).child(userId).child("secret").setValue(DHSec).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    uPairsDatabase.child(userId).child(currentUser.getUid()).child("date").setValue(curDate)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
-                                                    uPairReqDatabase.child(userId).child(currentUser.getUid()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    uPairsDatabase.child(userId).child(currentUser.getUid()).child("secret").setValue(DHSec).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                         @Override
                                                         public void onSuccess(Void aVoid) {
-                                                            pairRequestBtn.setEnabled(true);
-                                                            uPairReqState = "paired";
-                                                            pairRequestBtn.setText("Remove Pairing");
+                                                            uPairReqDatabase.child(currentUser.getUid()).child(userId).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void aVoid) {
+                                                                    uPairReqDatabase.child(userId).child(currentUser.getUid()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                        @Override
+                                                                        public void onSuccess(Void aVoid) {
+                                                                            pairRequestBtn.setEnabled(true);
+                                                                            uPairReqState = "paired";
+                                                                            pairRequestBtn.setText("Remove Pairing");
+
+                                                                            decRequestBtn.setVisibility(View.INVISIBLE);
+                                                                            decRequestBtn.setEnabled(false);
+                                                                        }
+                                                                    });
+                                                                }
+                                                            });
                                                         }
                                                     });
                                                 }
                                             });
-                                        }
-                                    });
+                                }
+                            });
                         }
                     });
                 }
             }
         });
 
+    }
+
+    private static void byte2hex(byte b, StringBuffer buf) {
+        char[] hexChars = { '0', '1', '2', '3', '4', '5', '6', '7', '8',
+                '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+        int high = ((b & 0xf0) >> 4);
+        int low = (b & 0x0f);
+        buf.append(hexChars[high]);
+        buf.append(hexChars[low]);
+    }
+
+
+    private static String toHexString(byte[] block) {
+        StringBuffer buf = new StringBuffer();
+        int len = block.length;
+        for (int i = 0; i < len; i++) {
+            byte2hex(block[i], buf);
+            if (i < len-1) {
+                //buf.append(":");
+            }
+        }
+        return buf.toString();
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        userRef.child("active").setValue(true);
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        userRef.child("active").setValue(ServerValue.TIMESTAMP);
     }
 
     @Override

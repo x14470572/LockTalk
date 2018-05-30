@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,9 +23,20 @@ import android.widget.Toast;
 //import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import java.math.BigInteger;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class SearchUsers extends AppCompatActivity {
@@ -35,8 +47,14 @@ public class SearchUsers extends AppCompatActivity {
     private RecyclerView uSearchResults;
 
     private DatabaseReference uDatabase;
+    private DatabaseReference userRef;
+    private FirebaseAuth fbAuth;
+    private FirebaseUser fbUser;
+    private DatabaseReference keysDatabase;
 
     private LinearLayoutManager layoutManager;
+
+    private BigInteger g,p,x,y,A,B,s1,s2;
 
 
     @Override
@@ -46,7 +64,14 @@ public class SearchUsers extends AppCompatActivity {
         Toolbar toolBar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolBar);
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
+
+        fbAuth = FirebaseAuth.getInstance();
+        fbUser = fbAuth.getCurrentUser();
         uDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        keysDatabase = FirebaseDatabase.getInstance().getReference().child("PublicKeys");
+        userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(fbUser.getUid());
 
         layoutManager = new LinearLayoutManager(this);
 
@@ -63,6 +88,7 @@ public class SearchUsers extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        userRef.child("active").setValue(true);
 
         FirebaseRecyclerOptions<Users> options =
                 new FirebaseRecyclerOptions.Builder<Users>()
@@ -84,6 +110,7 @@ public class SearchUsers extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull UserViewHolder userViewHolder, int position, @NonNull Users users) {
                 userViewHolder.setUName(users.getUsername());
                 userViewHolder.setFName(users.getFullname());
+                userViewHolder.setUserImage(users.getSmallImage());
 
                 final String userId = getRef(position).getKey();
 
@@ -101,6 +128,7 @@ public class SearchUsers extends AppCompatActivity {
         };
          adapter.startListening();
          uSearchResults.setAdapter(adapter);
+
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
@@ -120,6 +148,16 @@ public class SearchUsers extends AppCompatActivity {
             TextView fNameTV = (TextView) uView.findViewById(R.id.fNameTV);
             fNameTV.setText(fullname);
         }
+        public void setUserImage(String smallImage){
+            CircleImageView userImgView = (CircleImageView) uView.findViewById(R.id.profilePic);
+            Picasso.get().load(smallImage).placeholder(R.drawable.profile_pic_resized).into(userImgView);
+        }
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        userRef.child("active").setValue(ServerValue.TIMESTAMP);
     }
 
     @Override

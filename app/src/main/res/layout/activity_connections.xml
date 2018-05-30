@@ -27,6 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#99e60000"
@@ -50,7 +51,7 @@
             android:id="@+id/HubTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="112dp"
+            android:layout_marginStart="142dp"
             android:layout_marginTop="16dp"
             android:text="Connections"
             android:textColor="@android:color/background_light"
@@ -63,8 +64,9 @@
             android:id="@+id/pairsRV"
             android:layout_width="368dp"
             android:layout_height="531dp"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="119dp" />
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

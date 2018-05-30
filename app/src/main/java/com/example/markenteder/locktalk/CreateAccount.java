@@ -5,11 +5,13 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
@@ -20,6 +22,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
@@ -38,6 +41,9 @@ public class CreateAccount extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+
+        /*getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);*/
 
         fAuth = FirebaseAuth.getInstance();
 
@@ -77,6 +83,7 @@ public class CreateAccount extends AppCompatActivity {
 
         fData = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
 
+
         HashMap<String, String> userMap = new HashMap<>();
         userMap.put("username", userName);
         userMap.put("pnumber", phoneNum);
@@ -98,7 +105,17 @@ public class CreateAccount extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Verification Successful", Toast.LENGTH_LONG).show();
+
+                            String dToken = FirebaseInstanceId.getInstance().getToken();
+                            String currentUID = fAuth.getCurrentUser().getUid();
+
+                            fData.child(currentUID).child("deviceToken").setValue(dToken).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(getApplicationContext(), "Verification Successful", Toast.LENGTH_LONG).show();
+                                }
+                            });
+
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException){
                                 Toast.makeText(getApplicationContext(), "Incorrect Verification Code", Toast.LENGTH_LONG).show();
